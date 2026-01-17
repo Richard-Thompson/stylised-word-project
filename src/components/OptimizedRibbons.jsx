@@ -201,6 +201,7 @@ const OptimizedRibbons = ({ sphereRef, enabled = true, mode = 'both' }) => {
       
       // Debug: Log high Y positions
       if (point.position.y > 2 && ribbonIndex === 0 && Math.random() < 0.05) {
+        console.log({
           y: point.position.y.toFixed(2),
           trailIndex: i,
           age: (currentTime - point.timestamp).toFixed(0)
@@ -310,6 +311,7 @@ const OptimizedRibbons = ({ sphereRef, enabled = true, mode = 'both' }) => {
     
     // Debug: Check if ribbons are being disabled due to height
     if (currentSpherePosition.y > 2 && Math.random() < 0.1) {
+      console.log({
         y: currentSpherePosition.y.toFixed(2),
         trailCount: trailHistory.current.length,
         enabled: enabled,
