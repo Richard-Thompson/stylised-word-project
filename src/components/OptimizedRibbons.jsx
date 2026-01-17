@@ -341,7 +341,6 @@ const OptimizedRibbons = ({ sphereRef, enabled = true, mode = 'both' }) => {
     if (frameCounter.current % UPDATE_FREQUENCY === 0 || trailUpdated) {
       // Clean old trail points
       const currentTime = performance.now();
-      const originalLength = trailHistory.current.length;
       trailHistory.current = trailHistory.current.filter(point => 
         currentTime - point.timestamp < TRAIL_LIFETIME
       );

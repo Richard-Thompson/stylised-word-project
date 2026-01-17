@@ -3,7 +3,6 @@ import React, { Suspense, useMemo, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, Sphere, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import Hdri from "../Hdri";
 
 function Model({ url = "/test-clouds-1.4-1.9-test.glb", ...props }) {
   const { scene } = useGLTF(url);
