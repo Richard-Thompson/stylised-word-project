@@ -36,7 +36,6 @@ const MovingSphere = React.forwardRef(({ onSphereMove, ribbonMode = 'both' }, re
   const cameraOffsetRef = useRef(new THREE.Vector3(-CAMERA_DISTANCE, 0, 0));
   const isInitializedRef = useRef(false);
   const baseMeshRef = useRef(null);
-  const previousPositionRef = useRef(new THREE.Vector3(0, SPHERE_HEIGHT_OFFSET, 0));
   const movementVectorRef = useRef(new THREE.Vector3(0, 0, 1)); // Default forward direction
   
   // Initialize sphere and camera positions
@@ -79,7 +78,7 @@ const MovingSphere = React.forwardRef(({ onSphereMove, ribbonMode = 'both' }, re
     
     // Don't notify parent here - wait until sphere actually moves in useFrame
     // This prevents grass bending at cursor position instead of sphere position
-  }, [camera, onSphereMove]);
+  }, [camera]);
 
   // Expose the pointer move handler to parent components
   React.useImperativeHandle(ref, () => ({
