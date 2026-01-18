@@ -3,6 +3,8 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { PMREMGenerator, TextureLoader, EquirectangularReflectionMapping } from 'three';
 import { useThree } from '@react-three/fiber';
 
+const PUBLIC_URL = process.env.PUBLIC_URL || '';
+
 /**
  * Smart Environment Map Component - Handles both HDR and PNG files
  * 
@@ -13,7 +15,7 @@ import { useThree } from '@react-three/fiber';
  * @param {function} onError - Callback when texture fails to load
  */
 export default function EnvironmentMap({ 
-  texturePath = '/sky_19_2k.png',
+  texturePath = `${PUBLIC_URL}/sky_19_2k.png`,
   intensity = 1.0,
   onLoad,
   onError 

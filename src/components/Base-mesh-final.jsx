@@ -7,8 +7,10 @@ import React, { useMemo } from 'react'
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 
+const PUBLIC_URL = process.env.PUBLIC_URL || ''
+
 export function Model({ onPointerMove, ...props }) {
-  const { nodes, materials } = useGLTF('/final-base-1.1.glb')
+  const { nodes, materials } = useGLTF(`${PUBLIC_URL}/final-base-1.1.glb`)
 
   // Create MeshBasicMaterial that keeps any textures from the original material
   const basicMaterial = useMemo(() => {
@@ -31,4 +33,4 @@ export function Model({ onPointerMove, ...props }) {
   )
 }
 
-useGLTF.preload('/final-base-1.1.glb')
+useGLTF.preload(`${PUBLIC_URL}/final-base-1.1.glb`)

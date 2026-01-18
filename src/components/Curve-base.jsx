@@ -4,6 +4,8 @@ import { useLoader, useFrame } from "@react-three/fiber";
 import { Model } from "./Base-mesh-final";
 import MovingSphere from "./MovingSphere";
 
+const PUBLIC_URL = process.env.PUBLIC_URL || "";
+
 // Performance-optimized constants
 const NEEDS_NORMALIZE = false;
 const TEXTURE_COUNT = 4;
@@ -83,10 +85,10 @@ const NOISE_SHADER = `
 `;
 
 export default function PlaneInstancerWithColor({
-  posBin = "/positions.bin",
-  rotBin = "/rotations.bin",
-  sclBin = "/scales.bin",
-  colorBin = "/colors.bin",
+  posBin = `${PUBLIC_URL}/positions.bin`,
+  rotBin = `${PUBLIC_URL}/rotations.bin`,
+  sclBin = `${PUBLIC_URL}/scales.bin`,
+  colorBin = `${PUBLIC_URL}/colors.bin`,
   instanceCount = undefined,
   planeSize = 2.2, // Increased size for better grass coverage
   castShadow = false,
@@ -102,14 +104,14 @@ export default function PlaneInstancerWithColor({
 
   // Load textures with memoized array to prevent unnecessary re-renders
   const textures = useMemo(() => [
-    "/alpha-map.png",
-    "/alpha-map1.png", 
-    "/alpha-map2.png",
-    "/alpha-map3.png"
+    `${PUBLIC_URL}/alpha-map.png`,
+    `${PUBLIC_URL}/alpha-map1.png`, 
+    `${PUBLIC_URL}/alpha-map2.png`,
+    `${PUBLIC_URL}/alpha-map3.png`
   ], []);
   
   const [alphaMap, alphaMap1, alphaMap2, alphaMap3] = useLoader(THREE.TextureLoader, textures);
-  const normalMap = useLoader(THREE.TextureLoader, "/normal-map.png");
+  const normalMap = useLoader(THREE.TextureLoader, `${PUBLIC_URL}/normal-map.png`);
 
   // Memoized fetch function to avoid recreation
   const fetchBinaryData = useCallback(async () => {

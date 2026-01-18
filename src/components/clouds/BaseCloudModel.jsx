@@ -4,7 +4,9 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, Sphere, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
-function Model({ url = "/test-clouds-1.4-1.9-test.glb", ...props }) {
+const PUBLIC_URL = process.env.PUBLIC_URL || "";
+
+function Model({ url = `${PUBLIC_URL}/test-clouds-1.4-1.9-test.glb`, ...props }) {
   const { scene } = useGLTF(url);
 
   const base = useMemo(
@@ -53,7 +55,7 @@ function Model({ url = "/test-clouds-1.4-1.9-test.glb", ...props }) {
 }
 
 
-useGLTF.preload("/test-clouds-1.4-1.9-test.glb");
+useGLTF.preload(`${PUBLIC_URL}/test-clouds-1.4-1.9-test.glb`);
 
 export default function App() {
   return (
