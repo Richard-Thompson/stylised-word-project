@@ -3,6 +3,7 @@ import './App.css';
 import * as THREE from 'three';
 import { KeyboardControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import AuthScreen from './components/AuthScreen';
 
 // Lazy load components for code splitting and faster initial load
 const Model = React.lazy(() => import('./components/Curve-base'));
@@ -60,6 +61,7 @@ const getParticleConfig = (performanceLevel = 'GOOD') => {
 };
 
 function App() {
+  const [isAuthed, setIsAuthed] = React.useState(false);
   const [performanceLevel, setPerformanceLevel] = React.useState('GOOD');
   const [swarmMode, setSwarmMode] = React.useState('normal'); // 'normal', 'swarm', 'returning'
   const [isSwarmButtonDisabled, setIsSwarmButtonDisabled] = React.useState(false);
@@ -158,6 +160,10 @@ function App() {
 
   // Memoized particle config based on performance
   const particleConfig = useMemo(() => getParticleConfig(performanceLevel), [performanceLevel]);
+
+  if (!isAuthed) {
+    return <AuthScreen onAuth={() => setIsAuthed(true)} />;
+  }
 
   // Memoized render components to prevent unnecessary re-renders
   const sceneComponents = useMemo(() => (
