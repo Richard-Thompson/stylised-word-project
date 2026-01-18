@@ -1,7 +1,7 @@
 import React, { Suspense, memo, useMemo } from 'react';
 import './App.css';
 import * as THREE from 'three';
-import { KeyboardControls, Sparkles } from '@react-three/drei';
+import { KeyboardControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
 // Lazy load components for code splitting and faster initial load
@@ -15,7 +15,6 @@ const ParticleControls = React.lazy(() => import('./components/ParticleControls'
 const PostProcessing = React.lazy(() => import('./components/PostProcessing'));
 const RibbonControls = React.lazy(() => import('./components/RibbonControls'));
 
-const BaseCloudsModel = React.lazy(() => import('./components/clouds/BaseCloudModel'));
 
 // Pre-computed constants for performance
 const KEYBOARD_MAP = [

@@ -14,9 +14,6 @@ const DEFAULT_WAVE_STRENGTH = 0.03; // Reduced for better performance
 const DEFAULT_WAVE_SPEED = 1.2; // Slightly reduced
 const DEFAULT_WAVE_SCALE = 1.8; // Optimized scale
 
-// Performance flags
-const ENABLE_WAVES = true;
-const ENABLE_LOD = true;
 const UPDATE_FREQUENCY = 2; // Update every N frames
 
 /**
@@ -529,7 +526,6 @@ export default function PlaneInstancerWithColor({
     if (!inst || !transforms || !instanceColorArray || !textureIndexArray) return;
 
     // Batch matrix updates for better performance
-    const tmpMatrix = new THREE.Matrix4();
     const tmpObject = new THREE.Object3D();
     
     transforms.forEach((t, i) => {

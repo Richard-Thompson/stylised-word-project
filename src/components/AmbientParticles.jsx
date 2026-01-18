@@ -60,8 +60,6 @@ const AmbientParticles = React.memo(({ spherePosition = null, swarmMode = 'norma
     const animationOffsets = new Float32Array(count * 3);
     const swarmOffsets = new Float32Array(count * 3); // For orbit randomization
     const orbitRadii = new Float32Array(count); // Individual orbit radius for each particle
-    const orbitSpeeds = new Float32Array(count * 3); // Individual speed multipliers for chaos
-    const orbitAxes = new Float32Array(count * 3); // Random orbital axis orientations
     
     // Batch process for better performance
     for (let i = 0; i < count; i++) {
@@ -90,23 +88,13 @@ const AmbientParticles = React.memo(({ spherePosition = null, swarmMode = 'norma
       // Random orbit radius around 2.0 units with more variation (0.5 to 4.0 range)
       orbitRadii[i] = 0.5 + Math.random() * 3.5;
       
-      // Chaotic speed multipliers for interweaving (0.3x to 2.5x base speed)
-      orbitSpeeds[i3] = 0.3 + Math.random() * 2.2; // X speed multiplier
-      orbitSpeeds[i3 + 1] = 0.3 + Math.random() * 2.2; // Y speed multiplier
-      orbitSpeeds[i3 + 2] = 0.3 + Math.random() * 2.2; // Z speed multiplier
-      
-      // Random orbital axis orientations for spherical distribution
-      orbitAxes[i3] = (Math.random() - 0.5) * 2; // X axis tilt (-1 to 1)
-      orbitAxes[i3 + 1] = (Math.random() - 0.5) * 2; // Y axis tilt (-1 to 1)
-      orbitAxes[i3 + 2] = (Math.random() - 0.5) * 2; // Z axis tilt (-1 to 1)
-      
       // Optimized color generation vec3(0.702,0.922,0.949)
       colors[i3] = 0.702;
       colors[i3 + 1] = 0.922;
       colors[i3 + 2] = 0.949;
     }
     
-    return { positions, colors, initialPositions, animationOffsets, swarmOffsets, orbitRadii, orbitSpeeds, orbitAxes, count };
+    return { positions, colors, initialPositions, animationOffsets, swarmOffsets, orbitRadii, count };
   }, []);
 
   // Animation loop with swarm behavior, reverse swarm, and normal movement
@@ -116,7 +104,7 @@ const AmbientParticles = React.memo(({ spherePosition = null, swarmMode = 'norma
     const time = state.clock.elapsedTime;
     const positionAttribute = pointsRef.current.geometry.attributes.position;
     const positions = positionAttribute.array;
-    const { initialPositions, animationOffsets, swarmOffsets, orbitRadii, orbitSpeeds, orbitAxes, count } = particleData;
+    const { initialPositions, animationOffsets, swarmOffsets, orbitRadii, count } = particleData;
     const { movementRadius, speed, speedY, speedZ } = animationConstants;
     
     // Check if mode changed and start transition timer
@@ -147,8 +135,6 @@ const AmbientParticles = React.memo(({ spherePosition = null, swarmMode = 'norma
         const currentX = positions[i3];
         const currentY = positions[i3 + 1];
         const currentZ = positions[i3 + 2];
-        
-        const orbitRadius = orbitRadii[i];
         
         // Simplified smooth swarm motion - particles follow sphere in orbital pattern
         const swarmTime = time * swarmSpeed;

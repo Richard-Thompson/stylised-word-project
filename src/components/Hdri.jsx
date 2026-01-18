@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { PMREMGenerator, TextureLoader, EquirectangularReflectionMapping } from 'three';
 import { useThree } from '@react-three/fiber';
